@@ -29,7 +29,7 @@
         throw new Error("非法目标域名");
       }
       document.getElementById("go").href = url.href;
-      setTimeout(() => window.location.href = url.href, 800);
+      setTimeout(() => window.location.href = url.href, 500);
     } catch (e) {
       document.getElementById("msg").textContent = "跳转失败：目标不合法";
       document.getElementById("go").style.display = "none";
