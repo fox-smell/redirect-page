@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <title>跳转中...</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, nofollow" />
+  <style>
+    body { font-family: sans-serif; padding: 2em; text-align: center; }
+    a { display: inline-block; margin-top: 1em; padding: 0.5em 1em; background: #007aff; color: white; text-decoration: none; border-radius: 6px; }
+  </style>
+</head>
+<body>
+  <h1>正在跳转，请稍候...</h1>
+  <p id="msg">如果没有自动跳转，请点击下面的按钮。</p>
+  <a id="go" href="#" target="_blank" rel="noopener noreferrer">点击跳转</a>
+
+  <script>
+    const allowedDomains = [
+      "binance.com", "www.binance.com"
+    ];
+
+    const params = new URLSearchParams(window.location.search);
+    const target = params.get("target");
+
+    try {
+      const url = new URL(decodeURIComponent(target));
+      if (!allowedDomains.includes(url.hostname)) {
+        throw new Error("非法目标域名");
+      }
+      document.getElementById("go").href = url.href;
+      setTimeout(() => window.location.href = url.href, 800);
+    } catch (e) {
+      document.getElementById("msg").textContent = "跳转失败：目标不合法";
+      document.getElementById("go").style.display = "none";
+    }
+  </script>
+</body>
+</html>
